@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Image as ImageIcon, Video, Images } from "lucide-react";
+import { Play, Image as ImageIcon, Video, } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
