@@ -58,7 +58,7 @@ const Index = () => {
         <Card className="max-w-md w-full text-center shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
           <CardContent className="pt-8 pb-8">
             <CheckCircle className="w-24 h-24 text-green-500 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-slate-800 mb-4">You're In! 🎉</h2>
+            <h2 className="text-3xl font-bold text-slate-800 mb-4">You&rsquo;re In! 🎉</h2>
             <p className="text-slate-600 mb-8 text-lg leading-relaxed">
               Your spot is secured! Get ready for an amazing time of worship, fellowship, and fun at Camp Ndunda Falls.
             </p>
@@ -106,7 +106,7 @@ const Index = () => {
 
     <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed font-medium drop-shadow">
       Join us for an incredible weekend of adventure, fellowship and spiritual growth 
-      in God's beautiful creation. Where young hearts meet Jesus and friendships are born!
+      in God&rsquo;s beautiful creation. Where young hearts meet Jesus and friendships are born!
     </p>
 
     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 text-lg">
@@ -207,7 +207,7 @@ const Index = () => {
               Ready to Join Us?
             </h2>
             <p className="text-xl text-slate-600 leading-relaxed">
-              Don't miss out on this life-changing experience! 
+              Don&rsquo;t miss out on this life-changing experience! 
               Register now with your M-Pesa payment confirmation.
             </p>
           </div>
@@ -288,7 +288,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-4xl md:text-5xl font-bold mb-6">Have Questions?</h3>
           <p className="text-xl mb-8 text-purple-100 max-w-2xl mx-auto">
-            We're here to help! Reach out if you need any information about the retreat, 
+            We&rsquo;re here to help! Reach out if you need any information about the retreat, 
             payment, or what to bring.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

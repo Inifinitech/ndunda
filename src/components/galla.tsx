@@ -234,7 +234,7 @@ const Galla = () => {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <p className="text-lg text-slate-600 mb-6">
-            Can't wait to experience this amazing place? 
+            Can&rsquo;t wait to experience this amazing place? 
           </p>
           <Button 
             onClick={() => document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' })}
