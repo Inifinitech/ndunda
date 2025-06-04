@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Calendar, Users, Heart, Star, CheckCircle } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import toast from "react-hot-toast";
 import Galla from "@/components/galla";
 
 const Index = () => {
@@ -17,7 +17,6 @@ const Index = () => {
     mpesaMessage: ""
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -31,21 +30,14 @@ const Index = () => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.mpesaMessage) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields including your M-Pesa confirmation message.",
-        variant: "destructive"
-      });
+      toast.error("Please fill in all required fields including your M-Pesa confirmation message.")
       return;
     }
 
     console.log("Registration submitted:", formData);
     
     setIsSubmitted(true);
-    toast({
-      title: "Registration Successful!",
-      description: "Thank you for registering. We'll contact you soon with more details.",
-    });
+    toast.success("Registration Successful!")
   };
 
   const scrollToRegistration = () => {
