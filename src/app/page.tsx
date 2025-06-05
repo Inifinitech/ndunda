@@ -293,7 +293,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <div className="flex items-center bg-white/20 backdrop-blur-sm px-6 py-4 rounded-full">
               <Phone className="w-6 h-6 mr-3 text-yellow-300" />
-              <span className="text-lg font-semibold">+254 700 000 000</span>
+              <span className="text-lg font-semibold">+254 705590618</span>
             </div>
             <div className="flex items-center bg-white/20 backdrop-blur-sm px-6 py-4 rounded-full">
               <MapPin className="w-6 h-6 mr-3 text-yellow-300" />
