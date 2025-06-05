@@ -109,7 +109,7 @@ const Galla = () => {
               <ImageIcon className="w-5 h-5 mr-2" />
               Photos
             </Button>
-            <Button
+            {/* <Button
               onClick={() => setActiveTab('videos')}
               variant={activeTab === 'videos' ? 'default' : 'ghost'}
               className={`rounded-full px-8 py-3 font-semibold transition-all duration-300 ${
@@ -120,7 +120,7 @@ const Galla = () => {
             >
               <Video className="w-5 h-5 mr-2" />
               Videos
-            </Button>
+            </Button> */}
           </div>
         </div>
 
