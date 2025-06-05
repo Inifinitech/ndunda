@@ -71,11 +71,16 @@ const Index = () => {
       {/* Hero Section */}
      {/* Hero Section */}
 <section
-  className="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden bg-cover bg-center"
-  style={{ backgroundImage: `url('https://res.cloudinary.com/donshmlbl/image/upload/v1748712390/Vault_Funky_corrected_dhhmjc.png')` }} // Replace with your actual image path
+  className="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden bg-cover bg-center animate-zoom"
+  style={{ 
+    backgroundImage: `url('https://res.cloudinary.com/donshmlbl/image/upload/v1748712390/Vault_Funky_corrected_dhhmjc.png')`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
+    
+     }} // Replace with your actual image path
 >
   {/* Overlay */}
-  <div className="absolute inset-0 backdrop-blur-sm z-0"></div>
+  <div className="absolute inset-0 bg-black/60 z-0"></div>
 
   {/* Floating decorative elements */}
   <div className="absolute top-20 left-10 text-yellow-400 animate-pulse z-10">
@@ -89,17 +94,19 @@ const Index = () => {
   </div>
 
   <div className="relative z-10 max-w-6xl mx-auto">
+    <div className="mb-24">
     <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6 leading-tight">
       Camp Ndunda Falls
     </h1>
     <h2 className="text-3xl md:text-5xl text-white drop-shadow font-bold mb-4">
       Vault Retreat 2025
     </h2>
-
+    </div>
+{/* 
     <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed font-medium drop-shadow">
       Join us for an incredible weekend of adventure, fellowship and spiritual growth 
       in God&rsquo;s beautiful creation. Where young hearts meet Jesus and friendships are born!
-    </p>
+    </p> */}
 
     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 text-lg">
       <div className="flex items-center text-white bg-black/40 px-6 py-3 rounded-full shadow-lg backdrop-blur-sm">

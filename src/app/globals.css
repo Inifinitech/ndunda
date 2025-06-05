@@ -127,3 +127,44 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* @keyframes zoom {
+  0%, 100% {
+    background-size: 200%;
+  }
+  50% {
+    background-size: 190%;
+  }
+} */
+
+@keyframes zoomMobile {
+  0%, 100% {
+    background-size: 200%;
+  }
+  50% {
+    background-size: 190%;
+  }
+}
+
+@keyframes zoomDesktop {
+  0%, 100% {
+    background-size: 140%;
+  }
+  50% {
+    background-size: 130%;
+  }
+}
+
+.bg-zoom {
+  animation: zoomMobile 15s ease-in-out infinite;
+}
+
+.animate-zoom {
+  animation: zoom 15s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .bg-zoom {
+    animation: zoomDesktop 20s ease-in-out infinite;
+  }
+}
