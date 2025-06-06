@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Calendar, Users, Heart, Star, CheckCircle, CreditCard } from "lucide-react";
+import { MapPin, Phone, Calendar, Heart, Star, CheckCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
 import Galla from "@/components/galla";
 
