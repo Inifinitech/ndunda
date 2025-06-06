@@ -35,19 +35,19 @@ const Galla = () => {
       url2: "https://res.cloudinary.com/donshmlbl/image/upload/v1748973275/ndunda1_ha1mf5.jpg",
       title: "Beautiful Waterfalls",
       description: "The stunning Ndunda Falls",
-    },
-    {
-      url1: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
-      url2: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
-      title: "Nature Trails",
-      description: "Hiking paths through the wilderness",
-    },
-    {
-      url1: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=800&h=600&fit=crop",
-      url2: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=800&h=600&fit=crop",
-      title: "Camp Grounds",
-      description: "Where memories are made",
-    },
+    }
+    // {
+    //   url1: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
+    //   url2: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
+    //   title: "Nature Trails",
+    //   description: "Hiking paths through the wilderness",
+    // },
+    // {
+    //   url1: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=800&h=600&fit=crop",
+    //   url2: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=800&h=600&fit=crop",
+    //   title: "Camp Grounds",
+    //   description: "Where memories are made",
+    // },
   ];
 
   const videos = [

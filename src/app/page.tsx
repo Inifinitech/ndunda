@@ -14,6 +14,7 @@ const Index = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    e_phone: "",
     mpesaMessage: ""
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -182,7 +183,7 @@ const Index = () => {
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder="e.g., +254 700 000 000"
+                    placeholder="+254 700 000 000"
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
@@ -191,15 +192,18 @@ const Index = () => {
                 </div>
 
                 <div className="space-y-2">
+                  <div>
                   <Label htmlFor="phone" className="text-lg font-semibold text-slate-700">
-                    Emergency Phone * <span className="text-sm tracking-tighter text-gray-500">(parent/guardian)</span>
+                    Emergency Phone *
                   </Label>
+                  <span className="text-sm text-gray-600">(parent/guardian)</span>
+                  </div>
                   <Input
-                    id="phone"
-                    name="phone"
+                    id="e_phone"
+                    name="e_phone"
                     type="tel"
-                    placeholder="e.g., +254 700 000 000"
-                    value={formData.phone}
+                    placeholder="+254 700 000 000"
+                    value={formData.e_phone}
                     onChange={handleInputChange}
                     className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
                     required
