@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Image as ImageIcon, Video, } from "lucide-react";
+import { Play, Image as ImageIcon, Video } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-
 const Galla = () => {
   const [activeTab, setActiveTab] = useState<'images' | 'videos'>('images');
 
@@ -23,63 +22,62 @@ const Galla = () => {
       url1: "https://res.cloudinary.com/donshmlbl/image/upload/v1748973269/ndunda2_s2j2l5.jpg",
       url2: "https://res.cloudinary.com/donshmlbl/image/upload/v1748974498/ndunda5_igh9j2.jpg",
       title: "Mud Fun",
-      description: "Unleash the childish you"
+      description: "Unleash the childish you",
     },
     {
       url1: "https://res.cloudinary.com/donshmlbl/image/upload/v1748973964/ndunda3_u3ai3l.jpg",
       url2: "https://res.cloudinary.com/donshmlbl/image/upload/v1748974375/ndunda4_owvmuf.jpg",
       title: "Canopy Walk",
-      description: "God's beautiful creation surrounds us"
+      description: "God's beautiful creation surrounds us",
     },
     {
       url1: "https://res.cloudinary.com/donshmlbl/image/upload/v1748973275/ndunda1_ha1mf5.jpg",
       url2: "https://res.cloudinary.com/donshmlbl/image/upload/v1748973275/ndunda1_ha1mf5.jpg",
       title: "Beautiful Waterfalls",
-      description: "The stunning Ndunda Falls"
+      description: "The stunning Ndunda Falls",
     },
     {
       url1: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
       url2: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=600&fit=crop",
       title: "Nature Trails",
-      description: "Hiking paths through the wilderness"
+      description: "Hiking paths through the wilderness",
     },
     {
       url1: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=800&h=600&fit=crop",
       url2: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=800&h=600&fit=crop",
       title: "Camp Grounds",
-      description: "Where memories are made"
-    }
+      description: "Where memories are made",
+    },
   ];
 
   const videos = [
     {
       thumbnail: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop",
       title: "Camp Ndunda Falls Tour",
-      description: "Take a virtual tour of our retreat location"
+      description: "Take a virtual tour of our retreat location",
     },
     {
       thumbnail: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop",
       title: "Previous Retreat Highlights",
-      description: "See the joy and fellowship from our last retreat"
+      description: "See the joy and fellowship from our last retreat",
     },
     {
       thumbnail: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&h=600&fit=crop",
       title: "Worship by the Falls",
-      description: "Experience worship in God's natural cathedral"
-    }
+      description: "Experience worship in God's natural cathedral",
+    },
   ];
 
-  const [visibleImages, setVisibleImages] = useState(images.map(() => true))
-  const [hoveredIndexes, setHoveredIndexes] = useState(images.map(() => false))
+  const [visibleImages, setVisibleImages] = useState(images.map(() => true));
+  const [hoveredIndexes, setHoveredIndexes] = useState(images.map(() => false));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setVisibleImages(prev => prev.map(val => !val))
-    }, 3000)
+      setVisibleImages((prev) => prev.map((val) => !val));
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
-
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50">
@@ -101,95 +99,107 @@ const Galla = () => {
               onClick={() => setActiveTab('images')}
               variant={activeTab === 'images' ? 'default' : 'ghost'}
               className={`rounded-full px-8 py-3 font-semibold transition-all duration-300 ${
-                activeTab === 'images' 
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg' 
+                activeTab === 'images'
+                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
                   : 'text-slate-600 hover:text-purple-600'
               }`}
             >
               <ImageIcon className="w-5 h-5 mr-2" />
               Photos
             </Button>
-            {/* <Button
+            <Button
               onClick={() => setActiveTab('videos')}
               variant={activeTab === 'videos' ? 'default' : 'ghost'}
               className={`rounded-full px-8 py-3 font-semibold transition-all duration-300 ${
-                activeTab === 'videos' 
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg' 
+                activeTab === 'videos'
+                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
                   : 'text-slate-600 hover:text-purple-600'
               }`}
             >
               <Video className="w-5 h-5 mr-2" />
               Videos
-            </Button> */}
+            </Button>
           </div>
         </div>
 
         {/* Images Gallery */}
         {activeTab === 'images' && (
-          <Carousel className="w-full max-w-5xl mx-auto">
-            <CarouselContent>
+          <Carousel
+            className="w-full max-w-6xl mx-auto"
+            opts={{
+              align: "start", // Align items to the start for peek effect
+              slidesToScroll: 1, // Scroll one item at a time
+              dragFree: true, // Enable free drag scrolling
+              loop: false, // Optional: set to true for infinite looping
+              containScroll: "trimSnaps", // Ensures smooth snapping behavior
+            }}
+          >
+            <CarouselContent className="-ml-2">
               {images.map((image, index) => {
-  const showPrimary = visibleImages[index] && !hoveredIndexes[index];
+                const showPrimary = visibleImages[index] && !hoveredIndexes[index];
 
-  return (
-    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-      <Card
-        className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-        onMouseEnter={() =>
-          setHoveredIndexes(prev => {
-            const updated = [...prev];
-            updated[index] = true;
-            return updated;
-          })
-        }
-        onMouseLeave={() =>
-          setHoveredIndexes(prev => {
-            const updated = [...prev];
-            updated[index] = false;
-            return updated;
-          })
-        }
-      >
-        <CardContent className="p-0 relative">
-          <AspectRatio ratio={4 / 3}>
-            {/* Primary Image */}
-            <Image
-              src={image.url1}
-              width={500}
-              height={1000}
-              alt={image.title}
-              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
-                showPrimary ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-            {/* Secondary Image */}
-            <Image
-              src={image.url2}
-              width={500}
-              height={1000}
-              alt={image.title + 'Alt'}
-              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
-                showPrimary ? 'opacity-0' : 'opacity-100'
-              }`}
-            />
+                return (
+                  <CarouselItem
+                    key={index}
+                    className="basis-[90%] sm:basis-[45%] lg:basis-[30%] px-2"
+                  >
+                    <div
+                      className="rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 relative"
+                      onMouseEnter={() =>
+                        setHoveredIndexes((prev) => {
+                          const updated = [...prev];
+                          updated[index] = true;
+                          return updated;
+                        })
+                      }
+                      onMouseLeave={() =>
+                        setHoveredIndexes((prev) => {
+                          const updated = [...prev];
+                          updated[index] = false;
+                          return updated;
+                        })
+                      }
+                    >
+                      <AspectRatio
+                        ratio={1}
+                        className="rounded-xl overflow-hidden sm:aspect-[1]"
+                      >
+                        {/* Primary Image */}
+                        <Image
+                          src={image.url1}
+                          width={500}
+                          height={1000}
+                          alt={image.title}
+                          className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
+                            showPrimary ? "opacity-100" : "opacity-0"
+                          }`}
+                        />
+                        {/* Secondary Image */}
+                        <Image
+                          src={image.url2}
+                          width={500}
+                          height={1000}
+                          alt={image.title + " Alt"}
+                          className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
+                            showPrimary ? "opacity-0" : "opacity-100"
+                          }`}
+                        />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/40" />
-            <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
-              <h3 className="text-2xl font-bold text-white drop-shadow-lg">{image.title}</h3>
-            </div>
-          </AspectRatio>
-
-          <div className="p-6">
-            <p className="text-slate-600">{image.description}</p>
-          </div>
-        </CardContent>
-      </Card>
-    </CarouselItem>
-  );
-})}
-
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-black/40 z-10" />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center z-20">
+                          <h3 className="text-2xl font-bold text-white drop-shadow-lg">
+                            {image.title}
+                          </h3>
+                          <p className="text-white/80 text-sm">{image.description}</p>
+                        </div>
+                      </AspectRatio>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
+
             <CarouselPrevious className="hidden md:flex" />
             <CarouselNext className="hidden md:flex" />
           </Carousel>
@@ -201,9 +211,9 @@ const Galla = () => {
             <CarouselContent>
               {videos.map((video, index) => (
                 <CarouselItem key={index} className="md:basis-1/2">
-                  <Card className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group cursor-pointer">
+                  <div className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group cursor-pointer">
                     <CardContent className="p-0 relative">
-                      <AspectRatio ratio={16/9}>
+                      <AspectRatio ratio={4 / 3}>
                         <Image
                           width={500}
                           height={1000}
@@ -222,7 +232,7 @@ const Galla = () => {
                         <p className="text-slate-600">{video.description}</p>
                       </div>
                     </CardContent>
-                  </Card>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -234,9 +244,9 @@ const Galla = () => {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <p className="text-lg text-slate-600 mb-6">
-            Can&rsquo;t wait to experience this amazing place? 
+            Can’t wait to experience this amazing place?
           </p>
-          <Button 
+          <Button
             onClick={() => document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' })}
             className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >

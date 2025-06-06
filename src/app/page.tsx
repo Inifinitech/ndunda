@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Calendar, Users, Heart, Star, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Calendar, Users, Heart, Star, CheckCircle, CreditCard } from "lucide-react";
 import toast from "react-hot-toast";
 import Galla from "@/components/galla";
 
@@ -133,68 +133,6 @@ const Index = () => {
   </div>
 </section>
 
-      {/* About Section
-      <section className="py-20 px-4 bg-white/80">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-              Why You Don't Want to Miss This!
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              This isn't just another retreat - it's where faith comes alive, friendships are forged, 
-              and memories are made that will last a lifetime!
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-purple-50 to-blue-50">
-              <CardHeader className="pb-4">
-                <div className="bg-gradient-to-br from-purple-500 to-blue-500 p-6 rounded-full w-20 h-20 mx-auto mb-4 shadow-lg">
-                  <Cross className="w-8 h-8 text-white mx-auto" />
-                </div>
-                <CardTitle className="text-2xl text-slate-800 font-bold">Spiritual Growth</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600 leading-relaxed text-lg">
-                  Powerful worship sessions, inspiring messages, and quiet time with God in nature's cathedral. 
-                  Come encounter Jesus in a fresh way!
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-blue-50 to-cyan-50">
-              <CardHeader className="pb-4">
-                <div className="bg-gradient-to-br from-blue-500 to-cyan-500 p-6 rounded-full w-20 h-20 mx-auto mb-4 shadow-lg">
-                  <Users className="w-8 h-8 text-white mx-auto" />
-                </div>
-                <CardTitle className="text-2xl text-slate-800 font-bold">Amazing Fellowship</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600 leading-relaxed text-lg">
-                  Connect with fellow young believers, share your journey, and build friendships 
-                  that will encourage you long after the retreat ends.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-gradient-to-br from-cyan-50 to-green-50">
-              <CardHeader className="pb-4">
-                <div className="bg-gradient-to-br from-cyan-500 to-green-500 p-6 rounded-full w-20 h-20 mx-auto mb-4 shadow-lg">
-                  <Heart className="w-8 h-8 text-white mx-auto" />
-                </div>
-                <CardTitle className="text-2xl text-slate-800 font-bold">Fun & Adventure</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600 leading-relaxed text-lg">
-                  From hiking to the falls to team games and campfires under the stars. 
-                  Experience God's joy through laughter and adventure!
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section> */}
-
       {/* Media Gallery Section */}
       <Galla />
 
@@ -211,7 +149,7 @@ const Index = () => {
             </p>
           </div>
           
-          <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
+          <div className="shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
             <CardHeader className="text-center pb-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-t-lg">
               <CardTitle className="text-3xl font-bold">Registration Form</CardTitle>
               <CardDescription className="text-lg text-purple-100">
@@ -251,15 +189,31 @@ const Index = () => {
                     required
                   />
                 </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-lg font-semibold text-slate-700">
+                    Emergency Phone * <span className="text-sm tracking-tighter text-gray-500">(parent/guardian)</span>
+                  </Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="e.g., +254 700 000 000"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
+                    required
+                  />
+                </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="mpesaMessage" className="text-lg font-semibold text-slate-700">
-                    M-Pesa Confirmation Message *
+                    M-Pesa Confirmation Message * 
                   </Label>
                   <Textarea
                     id="mpesaMessage"
                     name="mpesaMessage"
-                    placeholder="Paste your complete M-Pesa confirmation message here..."
+                    placeholder="Till: 4941686"
                     value={formData.mpesaMessage}
                     onChange={handleInputChange}
                     className="min-h-[120px] text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 resize-none rounded-xl"
@@ -278,9 +232,61 @@ const Index = () => {
                 </Button>
               </form>
             </CardContent>
-          </Card>
+          </div>
         </div>
       </section>
+
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
+              Event Details
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Everything you need to know to prepare for an unforgettable retreat at Camp Ndunda Falls.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {/* Event Info Cards */}
+            <div className="space-y-6">
+              <div className="flex items-center bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                <Calendar className="w-8 h-8 text-purple-600 mr-4" />
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-800">Date</h3>
+                  <p className="text-slate-600">August 17, 2025</p>
+                </div>
+              </div>
+              <div className="flex items-center bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                <MapPin className="w-8 h-8 text-purple-600 mr-4" />
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-800">Location</h3>
+                  <p className="text-slate-600">Camp Ndunda Falls, Embu County, Kenya</p>
+                </div>
+              </div>
+              <div className="flex items-center bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                <CreditCard className="w-8 h-8 text-purple-600 mr-4" />
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-800">Payment Methods</h3>
+                  <p className="text-slate-600">M-Pesa Till: <span className="tracking-wider text-green-700 text-xl font-semibold">4941686</span></p>
+                </div>
+              </div>
+            </div>
+
+            {/* Google Map */}
+            <div className="bg-white/30 backdrop-blur-sm rounded-xl shadow-lg p-2">
+              <h3 className="text-xl font-semibold text-slate-800 mb-4">Pickup Location</h3>
+              <div className="relative w-full h-96 rounded-lg overflow-hidden">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d73548.53294710068!2d36.6407831!3d-1.1075085!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f27bc1a7cb8cf%3A0xfb635419c9916829!2sLife%20Church%20International%20-%20Limuru%2C!5e1!3m2!1sen!2ske!4v1749232169690!5m2!1sen!2ske" width="600" height="450" style={{ border:0 }} allowFullScreen loading="lazy" title="Camp Ndunda Falls Pickup Location"></iframe>
+              </div>
+              <p className="text-slate-600 mt-4 text-center">
+                Pickup point: LCI, Old Sanctuary - Limuru Town
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Contact Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-purple-800 to-blue-800 text-white">
