@@ -58,7 +58,7 @@ const RegistrationForm = () => {
             <span className="block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text">Adventure</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Reserve your place for an unforgettable 3-day retreat experience at Kenya&lsquo;s most spectacular natural destination
+            Reserve your place for an unforgettable retreat experience at Kenya&lsquo;s most spectacular natural destination
           </p>
         </div>
 
