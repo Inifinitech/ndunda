@@ -1,75 +1,68 @@
 "use client"
 
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Calendar, Heart, Star, CheckCircle, CreditCard } from "lucide-react";
-import toast from "react-hot-toast";
+import { MapPin, Phone, Calendar, Heart, Star, CreditCard } from "lucide-react";
 import Galla from "@/components/galla";
+import RegistrationForm from "@/components/registrationform";
 
 const Index = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    e_phone: "",
-    mpesaMessage: ""
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   phone: "",
+  //   e_phone: "",
+  //   mpesaMessage: ""
+  // });
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     [name]: value
+  //   }));
+  // };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
     
-    if (!formData.name || !formData.phone || !formData.mpesaMessage) {
-      toast.error("Please fill in all required fields including your M-Pesa confirmation message.")
-      return;
-    }
+  //   if (!formData.name || !formData.phone || !formData.mpesaMessage) {
+  //     toast.error("Please fill in all required fields including your M-Pesa confirmation message.")
+  //     return;
+  //   }
 
-    console.log("Registration submitted:", formData);
+  //   console.log("Registration submitted:", formData);
     
-    setIsSubmitted(true);
-    toast.success("Registration Successful!")
-  };
+  //   setIsSubmitted(true);
+  //   toast.success("Registration Successful!")
+  // };
 
-  const scrollToRegistration = () => {
-    document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // const scrollToRegistration = () => {
+  //   document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' });
+  // };
 
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-cyan-100 flex items-center justify-center p-4">
-        <Card className="max-w-md w-full text-center shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
-          <CardContent className="pt-8 pb-8">
-            <CheckCircle className="w-24 h-24 text-green-500 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-slate-800 mb-4">You&rsquo;re In! 🎉</h2>
-            <p className="text-slate-600 mb-8 text-lg leading-relaxed">
-              Your spot is secured! Get ready for an amazing time of worship, fellowship, and fun at Camp Ndunda Falls.
-            </p>
-            <Button 
-              onClick={() => setIsSubmitted(false)}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Register Another Person
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // if (isSubmitted) {
+  //   return (
+  //     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-cyan-100 flex items-center justify-center p-4">
+  //       <Card className="max-w-md w-full text-center shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
+  //         <CardContent className="pt-8 pb-8">
+  //           <CheckCircle className="w-24 h-24 text-green-500 mx-auto mb-6" />
+  //           <h2 className="text-3xl font-bold text-slate-800 mb-4">You&rsquo;re In! 🎉</h2>
+  //           <p className="text-slate-600 mb-8 text-lg leading-relaxed">
+  //             Your spot is secured! Get ready for an amazing time of worship, fellowship, and fun at Camp Ndunda Falls.
+  //           </p>
+  //           <Button 
+  //             onClick={() => setIsSubmitted(false)}
+  //             className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+  //           >
+  //             Register Another Person
+  //           </Button>
+  //         </CardContent>
+  //       </Card>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-cyan-100">
-      {/* Hero Section */}
      {/* Hero Section */}
 <section
   className="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden bg-cover bg-center animate-zoom"
@@ -103,13 +96,13 @@ const Index = () => {
       Vault Retreat 2025
     </h2>
     </div>
-{/* 
-    <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed font-medium drop-shadow">
+
+    {/* <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed font-medium drop-shadow">
       Join us for an incredible weekend of adventure, fellowship and spiritual growth 
       in God&rsquo;s beautiful creation. Where young hearts meet Jesus and friendships are born!
-    </p> */}
+    </p> 
 
-    {/* <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 text-lg">
+    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 text-lg">
       <div className="flex items-center text-white bg-black/40 px-6 py-3 rounded-full shadow-lg backdrop-blur-sm">
         <MapPin className="w-5 h-5 mr-3 text-purple-200" />
         <span className="font-semibold">Embu County, Kenya</span>
@@ -124,13 +117,13 @@ const Index = () => {
       </div>
     </div> */}
 
-    <Button 
+    {/* <Button 
       onClick={scrollToRegistration}
       size="lg" 
       className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-12 py-6 mb-6 text-xl font-bold rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
     >
       Secure Your Spot Now!
-    </Button>
+    </Button> */}
   </div>
 </section>
 
@@ -138,7 +131,8 @@ const Index = () => {
       <Galla />
 
       {/* Registration Section */}
-      <section id="registration" className="py-20 px-4 bg-gradient-to-br from-purple-100 to-blue-100">
+      <RegistrationForm />
+      {/* <section id="registration" className="py-20 px-4 bg-gradient-to-br from-purple-100 to-blue-100">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
@@ -209,23 +203,89 @@ const Index = () => {
                     required
                   />
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="mpesaMessage" className="text-lg font-semibold text-slate-700">
-                    M-Pesa Confirmation Message * 
-                  </Label>
-                  <Textarea
-                    id="mpesaMessage"
-                    name="mpesaMessage"
-                    placeholder="Till: 4941686"
-                    value={formData.mpesaMessage}
-                    onChange={handleInputChange}
-                    className="min-h-[120px] text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 resize-none rounded-xl"
-                    required
-                  />
-                  <p className="text-purple-600 font-semibold text-center">
-                    💳 Please paste your M-Pesa confirmation to complete registration
-                  </p>
+
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-foreground border-b border-border pb-2 flex items-center gap-2">
+                    <CreditCard  className="w-5 h-5 text-purple-500"/>
+                    Choose your payment plan
+                  </h3>
+
+                  <RadioGroup
+                    value={formData.paymentPlan}
+                    onValueChange={(value) => handleInputChange("paymentPlan", value)}
+                    className="space-y-4"
+                  >
+                    <div className="flex items-center space-x-3 p-4 border-2 border-border rounded-xl hover:border-primary/50 transition-colors">
+                      <RadioGroupItem value="full" id="full" className="mt-1"/>
+                        <div className="flex-1">
+                          <label htmlFor="" className="text-lg font-semibold cursor-pointer">Pay in Full - KSH 2,200</label>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Complete payment now and enjoy peace of mind
+                          </p>
+                        </div>
+                        <div className="text-2xl font-bold text-primary">💰</div>
+                    </div>
+
+                    <div className="flex items-center space-x-3 p-4 border-2 border-border rounded-xl hover:border-primary/50 transition-colors">
+                      <RadioGroupItem value="deposit" id="deposit" className="mt-1" />
+                      <div className="flex-1">
+                        <label htmlFor="" className="text-lg font-semibold cursor-pointer">Pay Deposit - KSH 500</label>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Secure your spot now, pay balance (ksh 1700) later
+                        </p>
+                      </div>
+                      <div></div>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                <div>
+                  <Card className="shadow-2xl border-0 bg-gradient-to-br from-primary/10 to-primary/5">
+                    <CardHeader>
+                      <CardTitle>
+                        <MessageSquare />
+                        M-Pesa Payment
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="text-center p-6 bg-green-500/30 rounded-xl border border-primary/30">
+                        <h4 className="font-bold text-lg mb-2 text-foreground">Pay via M-Pesa</h4>
+                        <p className="text-sm text-muted-foreground">Till Number</p>
+                        <div className="text-3xl font-bold text-green-600/70 mb-2">4941686</div>
+                      </div>
+
+                       <div className="space-y-2">
+                        <Label htmlFor="mpesaMessage" className="text-lg font-semibold text-slate-700">
+                          M-Pesa Confirmation Message * 
+                        </Label>
+                        <Textarea
+                          id="mpesaMessage"
+                          name="mpesaMessage"
+                          placeholder="Till: 4941686"
+                          value={formData.mpesaMessage}
+                          onChange={handleInputChange}
+                          className="min-h-[120px] text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 resize-none rounded-xl"
+                          required
+                        />
+                        <p className="text-purple-600 font-semibold text-center">
+                          💳 Please paste your M-Pesa confirmation to complete registration
+                        </p>
+                      </div>
+
+                      <div >
+                        <h5>
+                          <ol>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                          </ol>
+                        </h5>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
                 
                 <Button 
@@ -238,7 +298,7 @@ const Index = () => {
             </CardContent>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-6xl mx-auto">
