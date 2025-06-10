@@ -236,7 +236,7 @@ const InstallmentTracker = ({ phoneNumber }: InstallmentTrackerProps) => {
 
             <div className="text-center p-4 bg-muted/20 rounded-lg">
               <h4 className="font-bold text-lg mb-2 text-foreground">Pay via M-Pesa</h4>
-              <div className="text-2xl font-bold text-primary mb-2">5467891</div>
+              <div className="text-2xl font-bold bg-green-600 bg-clip-text text-transparent mb-2">4941686</div>
               <p className="text-sm text-muted-foreground">Till Number</p>
             </div>
 
@@ -256,7 +256,7 @@ const InstallmentTracker = ({ phoneNumber }: InstallmentTrackerProps) => {
             <Button 
               onClick={handleInstallmentPayment}
               disabled={isLoading || !mpesaCode.trim()}
-              className="w-full h-12 text-lg font-semibold"
+              className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600"
             >
               {isLoading ? "Processing..." : `Pay KSH ${currentPhase.amount.toLocaleString()}`}
             </Button>
