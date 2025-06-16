@@ -503,7 +503,7 @@ const InstallmentTracker = ({ phoneNumber, fullName }: InstallmentTrackerProps) 
                   >
                     <ClockIcon className="w-16 h-16 text-yellow-500 dark:text-yellow-400 mx-auto mb-4 animate-pulse" />
                     <h4 className="text-xl font-semibold text-yellow-800 dark:text-yellow-200 mb-3">
-                      Payment Awaiting Approval
+                      Your Previous Payment is Awaiting Approval
                     </h4>
                     <p className="text-yellow-600 dark:text-yellow-300">
                       Your payment is being reviewed by our team. Please wait until it’s approved to proceed!

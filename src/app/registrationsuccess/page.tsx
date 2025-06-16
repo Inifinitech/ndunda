@@ -52,7 +52,7 @@ const RegistrationConfirmation = () => {
   }, []);
 
   const handleBackToForm = () => {
-    router.push("/register"); // Replace with your registration form route
+    router.push("/");
   };
 
   return (
