@@ -1,8 +1,10 @@
 "use client"
 
-import { MapPin, Phone, Calendar, Heart, Star, CreditCard } from "lucide-react";
+import { MapPin, Phone, Heart, Star} from "lucide-react";
 import Galla from "@/components/galla";
 import RegistrationForm from "@/components/registrationform";
+import EventDetails from "@/components/eventdetails";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   // const [formData, setFormData] = useState({
@@ -35,9 +37,9 @@ const Index = () => {
   //   toast.success("Registration Successful!")
   // };
 
-  // const scrollToRegistration = () => {
-  //   document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' });
-  // };
+  const scrollToRegistration = () => {
+    document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // if (isSubmitted) {
   //   return (
@@ -102,7 +104,7 @@ const Index = () => {
       in God&rsquo;s beautiful creation. Where young hearts meet Jesus and friendships are born!
     </p> 
 
-    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 text-lg">
+     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12 text-lg">
       <div className="flex items-center text-white bg-black/40 px-6 py-3 rounded-full shadow-lg backdrop-blur-sm">
         <MapPin className="w-5 h-5 mr-3 text-purple-200" />
         <span className="font-semibold">Embu County, Kenya</span>
@@ -115,15 +117,16 @@ const Index = () => {
         <Users className="w-5 h-5 mr-3 text-cyan-200" />
         <span className="font-semibold">Limited Spots Available</span>
       </div>
-    </div> */}
+    </div>
+    */}
 
-    {/* <Button 
+    <Button 
       onClick={scrollToRegistration}
       size="lg" 
       className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-12 py-6 mb-6 text-xl font-bold rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
     >
       Secure Your Spot Now!
-    </Button> */}
+    </Button>
   </div>
 </section>
 
@@ -132,225 +135,8 @@ const Index = () => {
 
       {/* Registration Section */}
       <RegistrationForm />
-      {/* <section id="registration" className="py-20 px-4 bg-gradient-to-br from-purple-100 to-blue-100">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-              Ready to Join Us?
-            </h2>
-            <p className="text-xl text-slate-600 leading-relaxed">
-              Don&rsquo;t miss out on this life-changing experience! 
-              Register now with your M-Pesa payment confirmation.
-            </p>
-          </div>
-          
-          <div className="shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
-            <CardHeader className="text-center pb-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-t-lg">
-              <CardTitle className="text-3xl font-bold">Registration Form</CardTitle>
-              <CardDescription className="text-lg text-purple-100">
-                Fill out the form below to secure your spot
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-lg font-semibold text-slate-700">
-                    Full Name *
-                  </Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-lg font-semibold text-slate-700">
-                    Phone Number *
-                  </Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="+254 700 000 000"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <div>
-                  <Label htmlFor="phone" className="text-lg font-semibold text-slate-700">
-                    Emergency Phone *
-                  </Label>
-                  <span className="text-sm text-gray-600">(parent/guardian)</span>
-                  </div>
-                  <Input
-                    id="e_phone"
-                    name="e_phone"
-                    type="tel"
-                    placeholder="+254 700 000 000"
-                    value={formData.e_phone}
-                    onChange={handleInputChange}
-                    className="h-14 text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-xl"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-foreground border-b border-border pb-2 flex items-center gap-2">
-                    <CreditCard  className="w-5 h-5 text-purple-500"/>
-                    Choose your payment plan
-                  </h3>
-
-                  <RadioGroup
-                    value={formData.paymentPlan}
-                    onValueChange={(value) => handleInputChange("paymentPlan", value)}
-                    className="space-y-4"
-                  >
-                    <div className="flex items-center space-x-3 p-4 border-2 border-border rounded-xl hover:border-primary/50 transition-colors">
-                      <RadioGroupItem value="full" id="full" className="mt-1"/>
-                        <div className="flex-1">
-                          <label htmlFor="" className="text-lg font-semibold cursor-pointer">Pay in Full - KSH 2,200</label>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            Complete payment now and enjoy peace of mind
-                          </p>
-                        </div>
-                        <div className="text-2xl font-bold text-primary">💰</div>
-                    </div>
-
-                    <div className="flex items-center space-x-3 p-4 border-2 border-border rounded-xl hover:border-primary/50 transition-colors">
-                      <RadioGroupItem value="deposit" id="deposit" className="mt-1" />
-                      <div className="flex-1">
-                        <label htmlFor="" className="text-lg font-semibold cursor-pointer">Pay Deposit - KSH 500</label>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Secure your spot now, pay balance (ksh 1700) later
-                        </p>
-                      </div>
-                      <div></div>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Card className="shadow-2xl border-0 bg-gradient-to-br from-primary/10 to-primary/5">
-                    <CardHeader>
-                      <CardTitle>
-                        <MessageSquare />
-                        M-Pesa Payment
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="text-center p-6 bg-green-500/30 rounded-xl border border-primary/30">
-                        <h4 className="font-bold text-lg mb-2 text-foreground">Pay via M-Pesa</h4>
-                        <p className="text-sm text-muted-foreground">Till Number</p>
-                        <div className="text-3xl font-bold text-green-600/70 mb-2">4941686</div>
-                      </div>
-
-                       <div className="space-y-2">
-                        <Label htmlFor="mpesaMessage" className="text-lg font-semibold text-slate-700">
-                          M-Pesa Confirmation Message * 
-                        </Label>
-                        <Textarea
-                          id="mpesaMessage"
-                          name="mpesaMessage"
-                          placeholder="Till: 4941686"
-                          value={formData.mpesaMessage}
-                          onChange={handleInputChange}
-                          className="min-h-[120px] text-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-purple-500 resize-none rounded-xl"
-                          required
-                        />
-                        <p className="text-purple-600 font-semibold text-center">
-                          💳 Please paste your M-Pesa confirmation to complete registration
-                        </p>
-                      </div>
-
-                      <div >
-                        <h5>
-                          <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                          </ol>
-                        </h5>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full h-16 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  Complete Registration
-                </Button>
-              </form>
-            </CardContent>
-          </div>
-        </div>
-      </section> */}
-
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-              Event Details
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Everything you need to know to prepare for an unforgettable retreat at Camp Ndunda Falls.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {/* Event Info Cards */}
-            <div className="space-y-6">
-              <div className="flex items-center bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-                <Calendar className="w-8 h-8 text-purple-600 mr-4" />
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800">Date</h3>
-                  <p className="text-slate-600">August 17, 2025</p>
-                </div>
-              </div>
-              <div className="flex items-center bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-                <MapPin className="w-8 h-8 text-purple-600 mr-4" />
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800">Location</h3>
-                  <p className="text-slate-600">Camp Ndunda Falls, Embu County, Kenya</p>
-                </div>
-              </div>
-              <div className="flex items-center bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-                <CreditCard className="w-8 h-8 text-purple-600 mr-4" />
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800">Payment Methods</h3>
-                  <p className="text-slate-600">M-Pesa Till: <span className="tracking-wider text-green-700 text-xl font-semibold">4941686</span></p>
-                </div>
-              </div>
-            </div>
-
-            {/* Google Map */}
-            <div className="bg-white/30 backdrop-blur-sm rounded-xl shadow-lg p-2">
-              <h3 className="text-xl font-semibold text-slate-800 mb-4">Pickup Location</h3>
-              <div className="relative w-full h-96 rounded-lg overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d73548.53294710068!2d36.6407831!3d-1.1075085!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f27bc1a7cb8cf%3A0xfb635419c9916829!2sLife%20Church%20International%20-%20Limuru%2C!5e1!3m2!1sen!2ske!4v1749232169690!5m2!1sen!2ske" width="600" height="450" style={{ border:0 }} allowFullScreen loading="lazy" title="Camp Ndunda Falls Pickup Location"></iframe>
-              </div>
-              <p className="text-slate-600 mt-4 text-center">
-                Pickup point: LCI, Old Sanctuary - Limuru Town
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
+      <EventDetails />
 
       {/* Contact Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-purple-800 to-blue-800 text-white">
