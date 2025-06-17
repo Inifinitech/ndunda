@@ -521,6 +521,7 @@ const InstallmentTracker = ({ phoneNumber, fullName }: InstallmentTrackerProps) 
                         value={mpesaCode}
                         onChange={(e) => setMpesaCode(e.target.value)}
                         className="h-12 h-12 text-base border-gray-300 focus:ring-blue-500"
+                        
                       />
                     </div>
 

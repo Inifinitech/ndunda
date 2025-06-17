@@ -353,10 +353,11 @@ const RegistrationForm: React.FC = () => {
                         </Label>
                         <Textarea
                           id="mpesaMessage"
-                          placeholder="Paste your M-Pesa confirmation message here after payment..."
+                          placeholder="Paste your M-Pesa confirmation code here after payment..."
                           value={formData.mpesaMessage}
                           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange("mpesaMessage", e.target.value)}
                           className="min-h-[120px] text-sm bg-white"
+                          required
                         />
                       </div>
                       <div className="p-4 bg-muted/50 rounded-lg">
