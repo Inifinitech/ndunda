@@ -69,7 +69,7 @@ const RegistrationConfirmation = () => {
               🎉 Registration Received!
             </h1>
             <p className="text-xl text-purple-100">
-              Thank you for joining Camp Ndunda Falls Youth Retreat 2025
+              Thank you for joining Camp Ndunda Falls Vault Retreat 2025
             </p>
           </div>
 
