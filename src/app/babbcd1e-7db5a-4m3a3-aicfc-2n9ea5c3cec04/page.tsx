@@ -54,8 +54,6 @@ interface PaymentRecord {
   notes?: string;
 }
 
-const api = process.env.NEXT_PUBLIC_BACKEND_URLA;
-
 const AdminPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
@@ -63,6 +61,8 @@ const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("members");
   const [members, setMembers] = useState<Member[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const api = process.env.NEXT_PUBLIC_BACKEND_URLA;
 
   // Fetch all members from the backend
   const fetchMembers = async () => {
