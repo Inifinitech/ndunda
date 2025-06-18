@@ -1,10 +1,11 @@
 "use client"
 
-import { MapPin, Phone, Heart, Star} from "lucide-react";
+import { Heart, Star} from "lucide-react";
 import Galla from "@/components/galla";
 import RegistrationForm from "@/components/registrationform";
 import EventDetails from "@/components/eventdetails";
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/footer";
 
 const Index = () => {
   // const [formData, setFormData] = useState({
@@ -139,7 +140,8 @@ const Index = () => {
       <EventDetails />
 
       {/* Contact Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-purple-800 to-blue-800 text-white">
+      <Footer />
+      {/* <section className="py-16 px-4 bg-gradient-to-r from-purple-800 to-blue-800 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-4xl md:text-5xl font-bold mb-6">Have Questions?</h3>
           <p className="text-xl mb-8 text-purple-100 max-w-2xl mx-auto">
@@ -157,7 +159,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
