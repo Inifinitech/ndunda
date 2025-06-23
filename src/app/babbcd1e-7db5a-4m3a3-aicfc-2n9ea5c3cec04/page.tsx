@@ -230,12 +230,12 @@ const AdminPage = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
+    <div className="w-full p-4 space-y-6">
+      <div className="md:flex items-center justify-between">
+      <div className="mb-2">
           <h1 className="text-3xl font-bold">Admin Panel</h1>
           <p className="text-muted-foreground">Manage member registrations and payments</p>
-        </div>
+      </div>
         <div className="flex items-center gap-4">
           <Badge variant="secondary" className="px-3 py-2">
             <Users className="w-4 h-4 mr-2" />
@@ -246,11 +246,11 @@ const AdminPage = () => {
             {pendingPayments.length} Pending
           </Badge>
         </div>
-      </div>
+        </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="members">All Members</TabsTrigger>
+          <TabsTrigger value="members">Members</TabsTrigger>
           <TabsTrigger value="payments">Pending Payments</TabsTrigger>
           <TabsTrigger value="stats">Statistics</TabsTrigger>
         </TabsList>
@@ -258,8 +258,8 @@ const AdminPage = () => {
         <TabsContent value="members" className="space-y-4">
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>Registered Members</CardTitle>
+              <div className="md:flex items-center justify-between">
+                <CardTitle className="mb-2">Registered Members</CardTitle>
                 <div className="flex items-center space-x-2">
                   <div className="relative">
                     <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
