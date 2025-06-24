@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import toast from "react-hot-toast";
-import { Users, Search, Eye, CheckCircle, XCircle, DollarSign, Clock, User } from "lucide-react";
+import { Users, Search, Eye, CheckCircle, XCircle, DollarSign, Clock, User, RefreshCcw } from "lucide-react";
 import LoadingSpinner from "@/components/loadingspinner";
 
 interface PaymentPhase {
@@ -110,6 +110,40 @@ const AdminPage = () => {
   useEffect(() => {
     fetchMembers();
   }, []);
+
+
+  useEffect(() => {
+    fetchRefreshPage()
+  }, [])
+
+    const fetchRefreshPage = async () => {
+    const response = await fetch(`${api}retreatreg`, {})
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch members");
+      }
+
+       const data: Member[] = await response.json();
+      // Map status and normalize payment_plan
+     const mappedData: Member[] = data.map((member) => ({
+      id: member.id,
+      full_name: member.full_name,
+      phone: member.phone,
+      location: member.location,
+      e_contact_name: member.e_contact_name,
+      e_contact_phone: member.e_contact_phone,
+      created_at: member.created_at,
+      updated_at: member.updated_at, // Include updated_at
+      payment_plan: member.payment_plan,
+      status: member.remaining_amount <= 0 ? "completed" : member.total_paid > 0 ? "active" : "pending",
+      total_paid: member.total_paid,
+      total_amount: member.total_amount, // Include total_amount
+      remaining_amount: member.remaining_amount,
+      phases: member.phases,
+    }));
+      setMembers(mappedData);
+  }
+ 
 
   // Derive pending payments from members
   const pendingPayments: PaymentRecord[] = members.flatMap(member =>
@@ -221,6 +255,10 @@ const AdminPage = () => {
     return latestPhase?.status.toLowerCase() || "pending";
   };
 
+  const handleRefresh = () => {
+    fetchRefreshPage()
+  }
+
   if (isLoading) {
     return (
       <div className="container mx-auto p-6 text-center">
@@ -259,7 +297,15 @@ const AdminPage = () => {
           <Card>
             <CardHeader>
               <div className="md:flex items-center justify-between">
+                <div className="flex items-center gap-2">
                 <CardTitle className="mb-2">Registered Members</CardTitle>
+                <button 
+                  onClick={handleRefresh}
+                  className="flex items-center gap-2 bg-black/80 text-gray-100 py-1 px-2 rounded-lg text-sm mb-2">
+                  <RefreshCcw size={12} />
+                  Refresh List
+                </button>
+                </div>
                 <div className="flex items-center space-x-2">
                   <div className="relative">
                     <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
