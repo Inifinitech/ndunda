@@ -30,7 +30,7 @@ interface Member {
   location: string;
   e_contact_name: string;
   e_contact_phone: string;
-  payment_plan: "full" | "installment"; // Match backend values
+  payment_plan: "full" | "installment";
   created_at: string;
   updated_at: string;
   total_amount: number;
@@ -64,7 +64,6 @@ const AdminPage = () => {
 
   const api = process.env.NEXT_PUBLIC_BACKEND_URLA;
 
-  // Fetch all members from the backend
   const fetchMembers = async () => {
     try {
       setIsLoading(true);
@@ -81,7 +80,7 @@ const AdminPage = () => {
       }
 
       const data: Member[] = await response.json();
-      // Map status and normalize payment_plan
+
      const mappedData: Member[] = data.map((member) => ({
       id: member.id,
       full_name: member.full_name,
@@ -90,11 +89,11 @@ const AdminPage = () => {
       e_contact_name: member.e_contact_name,
       e_contact_phone: member.e_contact_phone,
       created_at: member.created_at,
-      updated_at: member.updated_at, // Include updated_at
+      updated_at: member.updated_at,
       payment_plan: member.payment_plan,
       status: member.remaining_amount <= 0 ? "completed" : member.total_paid > 0 ? "active" : "pending",
       total_paid: member.total_paid,
-      total_amount: member.total_amount, // Include total_amount
+      total_amount: member.total_amount,
       remaining_amount: member.remaining_amount,
       phases: member.phases,
     }));
@@ -124,7 +123,7 @@ const AdminPage = () => {
       }
 
        const data: Member[] = await response.json();
-      // Map status and normalize payment_plan
+      
      const mappedData: Member[] = data.map((member) => ({
       id: member.id,
       full_name: member.full_name,
@@ -133,19 +132,17 @@ const AdminPage = () => {
       e_contact_name: member.e_contact_name,
       e_contact_phone: member.e_contact_phone,
       created_at: member.created_at,
-      updated_at: member.updated_at, // Include updated_at
+      updated_at: member.updated_at,
       payment_plan: member.payment_plan,
       status: member.remaining_amount <= 0 ? "completed" : member.total_paid > 0 ? "active" : "pending",
       total_paid: member.total_paid,
-      total_amount: member.total_amount, // Include total_amount
+      total_amount: member.total_amount,
       remaining_amount: member.remaining_amount,
       phases: member.phases,
     }));
       setMembers(mappedData);
   }
  
-
-  // Derive pending payments from members
   const pendingPayments: PaymentRecord[] = members.flatMap(member =>
     member.phases
       .filter(phase => phase.status === "PENDING" && phase.mpesa_code)
@@ -170,13 +167,11 @@ const AdminPage = () => {
     action: "approve" | "reject",
   ) => {
     try {
-      // Find the member
       const member = members.find(m => m.id === memberId);
       if (!member) {
         throw new Error("Member not found");
       }
 
-      // Update the phase
       const updatedPhases = member.phases.map(phase =>
         phase.phase_number === phaseNumber
           ? {
@@ -187,14 +182,12 @@ const AdminPage = () => {
           : phase
       );
 
-      // Log the payload
       const payload = {
         id: memberId,
         phases: updatedPhases,
       };
-      console.log("Sending PATCH payload:", JSON.stringify(payload, null, 2));
+      // console.log("Sending PATCH payload:", JSON.stringify(payload, null, 2));
 
-      // Send PATCH request
       const response = await fetch(`${api}retreatreg`, {
         method: "PATCH",
         headers: {
@@ -212,7 +205,6 @@ const AdminPage = () => {
       const data: { message: string; record: Member } = await response.json();
       console.log("PATCH response:", JSON.stringify(data, null, 2));
 
-      // Update local state
       setMembers(prev =>
         prev.map(m =>
           m.id === memberId
@@ -226,7 +218,6 @@ const AdminPage = () => {
       );
 
       toast.success(`Payment for phase ${phaseNumber} has been ${action === "approve" ? "approved" : "rejected"} successfully.`);
-      // Refresh members to ensure UI updates
       await fetchMembers();
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
@@ -234,26 +225,66 @@ const AdminPage = () => {
     }
   };
 
-  // Filter members by name, phone, or any phase M-Pesa code
   const filteredMembers = members.filter(member =>
     member.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     member.phone.includes(searchTerm) ||
     member.phases.some(phase => phase.mpesa_code && phase.mpesa_code.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  // Get phase status for a member (first phase with mpesa_code or latest phase)
   const getPhaseStatus = (member: Member): string => {
     const phaseWithMpesa = member.phases.find(phase => phase.mpesa_code);
     if (phaseWithMpesa) {
       return phaseWithMpesa.status.toLowerCase();
     }
-    // Fallback to latest phase by phase_number
+
     const latestPhase = member.phases.reduce((latest, phase) =>
       phase.phase_number > latest.phase_number ? phase : latest,
       member.phases[0]
     );
     return latestPhase?.status.toLowerCase() || "pending";
   };
+
+  const completedMembersCount = members.filter(member => {
+    const phases = member.phases || [];
+
+    if (member.payment_plan === "full") {
+      return phases.length === 1 && phases[0].status === "CONFIRMED";
+    }
+
+    if (member.payment_plan === "installment") {
+      return (
+        phases.length === 4 &&
+        phases.every(phase => phase.status === "CONFIRMED")
+      );
+    }
+
+    return false;
+  }).length;
+
+  const totalPaid = members.reduce((sum, member) => {
+  const phases = member.phases || [];
+
+  // For FULL plan
+  if (member.payment_plan === "full") {
+    if (phases.length === 1 && phases[0].status === "CONFIRMED") {
+      return sum + parseFloat(String(phases[0].amount || "0"));
+    }
+  }
+
+  // For INSTALLMENT plan
+  if (member.payment_plan === "installment") {
+    const confirmedPhasesAmount = phases.reduce((phaseSum, phase) => {
+      if (phase.status === "CONFIRMED") {
+        return phaseSum + parseFloat(String(phase.amount || "0"));
+      }
+      return phaseSum;
+    }, 0);
+
+    return sum + confirmedPhasesAmount;
+  }
+
+  return sum;
+}, 0);
 
   const handleRefresh = () => {
     fetchRefreshPage()
@@ -383,7 +414,7 @@ const AdminPage = () => {
                               View Details
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="w-full max-w-md sm:max-w-2xl p-6">
+                          <DialogContent className="w-full h-full p-4 sm:max-w-2xl sm:h-auto sm:p-6 overflow-y-auto">
                             <DialogHeader>
                               <DialogTitle>Member Details</DialogTitle>
                             </DialogHeader>
@@ -423,7 +454,14 @@ const AdminPage = () => {
                                               Phase {phase.phase_number}: {phase.description} - KSH {phase.amount.toLocaleString()}
                                             </p>
                                             <p className="text-xs text-muted-foreground">
-                                              M-Pesa Code: {phase.mpesa_code || "N/A"} | Updated: {selectedMember.updated_at}
+                                              M-Pesa Code: {phase.mpesa_code || "N/A"} | Updated: {new Date(selectedMember.updated_at).toLocaleString("en-KE", {
+                                                year: "numeric",
+                                                month: "short",
+                                                day: "numeric",
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                                hour12: false,
+                                                })}
                                             </p>
                                           </div>
                                           <Badge variant={
@@ -451,125 +489,143 @@ const AdminPage = () => {
         </TabsContent>
 
         <TabsContent value="payments" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Pending Payment Approvals</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {pendingPayments.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <CheckCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p>No pending payments to review</p>
+  <Card>
+    <CardHeader>
+      <div className="flex items-center gap-2">
+      <CardTitle>Pending Payment Approvals</CardTitle>
+      <button 
+        onClick={handleRefresh}
+        className="flex items-center gap-2 bg-black/80 text-gray-100 py-1 px-2 rounded-lg text-sm mb-2">
+        <RefreshCcw size={12} />
+        Refresh List
+      </button>
+      </div>
+    </CardHeader>
+    <CardContent>
+      <div className="space-y-4">
+        {pendingPayments.length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground">
+            <CheckCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
+            <p>No pending payments to review</p>
+          </div>
+        ) : (
+          pendingPayments.map((payment) => (
+            <Card key={`${payment.member_id}-${payment.phase_number}`} className="border-l-4 border-l-yellow-500">
+              <CardContent className="p-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="space-y-2 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <User className="w-4 h-4" />
+                      <span className="font-medium">{payment.member_name}</span>
+                      <Badge variant="outline">Phase {payment.phase_number}</Badge>
+                    </div>
+                    <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+                      {/* <span>Amount: KSH {payment.amount.toLocaleString()}</span> */}
+                      <span>M-Pesa Code: {payment.mpesa_code}</span>
+                      <span>
+                          Date: {new Date(payment.submitted_date).toLocaleString("en-KE", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: false,
+                          })}
+                      </span>
+                    </div>
                   </div>
-                ) : (
-                  pendingPayments.map((payment) => (
-                    <Card key={`${payment.member_id}-${payment.phase_number}`} className="border-l-4 border-l-yellow-500">
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <User className="w-4 h-4" />
-                              <span className="font-medium">{payment.member_name}</span>
-                              <Badge variant="outline">Phase {payment.phase_number}</Badge>
+                  <div className="flex items-center justify-end">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => setSelectedPayment(payment)}
+                        >
+                          <Eye className="w-4 h-4 mr-2" />
+                          Review
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="w-full sm:max-w-lg md:max-w-2xl p-6">
+                        <DialogHeader>
+                          <DialogTitle>Review Payment</DialogTitle>
+                        </DialogHeader>
+                        {selectedPayment && (
+                          <div className="space-y-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                              <div>
+                                <Label>Member Name</Label>
+                                <p className="text-sm">{selectedPayment.member_name}</p>
+                              </div>
+                              <div>
+                                <Label>Phase</Label>
+                                <p className="text-sm">Phase {selectedPayment.phase_number}</p>
+                              </div>
+                              {/* <div>
+                                <Label>Amount Paid</Label>
+                                <p className="text-sm">KSH {selectedPayment.amount.toLocaleString()}</p>
+                              </div> */}
+                              <div>
+                                <Label>Expected Amount</Label>
+                                <p className="text-sm">KSH {selectedPayment.expected_amount.toLocaleString()}</p>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                              <span>Amount: KSH {payment.amount.toLocaleString()}</span>
-                              <span>M-Pesa Code: {payment.mpesa_code}</span>
-                              <span>Date: {payment.submitted_date}</span>
+
+                            <div>
+                              <Label>M-Pesa Code</Label>
+                              <Textarea 
+                                value={selectedPayment.mpesa_code || "No M-Pesa code provided"}
+                                readOnly
+                                className="mt-2 min-h-[100px]"
+                              />
                             </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                  onClick={() => setSelectedPayment(payment)}
-                                >
-                                  <Eye className="w-4 h-4 mr-2" />
-                                  Review
-                                </Button>
-                              </DialogTrigger>
-                              <DialogContent className="w-full max-w-md sm:max-w-2xl p-6">
-                                <DialogHeader>
-                                  <DialogTitle>Review Payment</DialogTitle>
-                                </DialogHeader>
-                                {selectedPayment && (
-                                  <div className="space-y-6">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                      <div>
-                                        <Label>Member Name</Label>
-                                        <p className="text-sm">{selectedPayment.member_name}</p>
-                                      </div>
-                                      <div>
-                                        <Label>Phase</Label>
-                                        <p className="text-sm">Phase {selectedPayment.phase_number}</p>
-                                      </div>
-                                      <div>
-                                        <Label>Amount Paid</Label>
-                                        <p className="text-sm">KSH {selectedPayment.amount.toLocaleString()}</p>
-                                      </div>
-                                      <div>
-                                        <Label>Expected Amount</Label>
-                                        <p className="text-sm">KSH {selectedPayment.expected_amount.toLocaleString()}</p>
-                                      </div>
-                                    </div>
 
-                                    <div>
-                                      <Label>M-Pesa Code</Label>
-                                      <Textarea 
-                                        value={selectedPayment.mpesa_code || "No M-Pesa code provided"}
-                                        readOnly
-                                        className="mt-2 min-h-[100px]"
-                                      />
-                                    </div>
-
-                                    <div className="flex items-center gap-2">
-                                      <Button 
-                                        onClick={() => handlePaymentAction(
-                                          selectedPayment.member_id,
-                                          selectedPayment.phase_number,
-                                          "approve",
-                                          
-                                        )}
-                                        className="flex-1"
-                                      >
-                                        <CheckCircle className="w-4 h-4 mr-2" />
-                                        Approve Payment
-                                      </Button>
-                                      <Button 
-                                        variant="destructive"
-                                        onClick={() => handlePaymentAction(
-                                          selectedPayment.member_id,
-                                          selectedPayment.phase_number,
-                                          "reject",
-                                        
-                                        )}
-                                        className="flex-1"
-                                      >
-                                        <XCircle className="w-4 h-4 mr-2" />
-                                        Reject Payment
-                                      </Button>
-                                    </div>
-                                  </div>
+                            <div className="flex flex-col sm:flex-row gap-2">
+                              <Button 
+                                onClick={() => handlePaymentAction(
+                                  selectedPayment.member_id,
+                                  selectedPayment.phase_number,
+                                  "approve",
                                 )}
-                              </DialogContent>
-                            </Dialog>
+                                className="flex-1"
+                              >
+                                <CheckCircle className="w-4 h-4 mr-2" />
+                                Approve Payment
+                              </Button>
+                              <Button 
+                                variant="destructive"
+                                onClick={() => handlePaymentAction(
+                                  selectedPayment.member_id,
+                                  selectedPayment.phase_number,
+                                  "reject",
+                                )}
+                                className="flex-1"
+                              >
+                                <XCircle className="w-4 h-4 mr-2" />
+                                Reject Payment
+                              </Button>
+                            </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )))}
+                        )}
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
+          ))
+        )}
+      </div>
+    </CardContent>
+  </Card>
+</TabsContent>
+
 
           <TabsContent value="stats" className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               <Card>
                 <CardContent className="p-6">
+                  
                   <div className="flex items-center">
                     <Users className="h-8 w-8 text-blue-600" />
                     <div className="ml-4">
@@ -583,11 +639,25 @@ const AdminPage = () => {
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center">
+                    <DollarSign className="h-8 w-8 text-green-200" />
+                    <div className="ml-4">
+                      <p className="text-sm font-medium text-muted-foreground">Total Expected</p>
+                      <p className="text-2xl font-bold">
+                        KSH {members.reduce((sum, member) => sum + member.total_paid, 0).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center">
                     <DollarSign className="h-8 w-8 text-green-600" />
                     <div className="ml-4">
                       <p className="text-sm font-medium text-muted-foreground">Total Paid</p>
                       <p className="text-2xl font-bold">
-                        KSH {members.reduce((sum, member) => sum + member.total_paid, 0).toLocaleString()}
+                        KSH {totalPaid.toLocaleString()}
                       </p>
                     </div>
                   </div>
@@ -601,7 +671,7 @@ const AdminPage = () => {
                     <div className="ml-4">
                       <p className="text-sm font-medium text-muted-foreground">Completed</p>
                       <p className="text-2xl font-bold">
-                        {members.filter(m => m.status === "completed").length}
+                        {completedMembersCount}
                       </p>
                     </div>
                   </div>
