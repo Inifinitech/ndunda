@@ -52,7 +52,7 @@ const InstallmentTracker = ({ phoneNumber, fullName }: InstallmentTrackerProps) 
   const [memberData, setMemberData] = useState<MemberData | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const tillNumber = '4641686';
+  const tillNumber = '4941686';
 
   const handleCopy = async () => {
     try {
