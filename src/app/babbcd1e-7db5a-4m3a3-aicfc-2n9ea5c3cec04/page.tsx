@@ -361,6 +361,7 @@ const AdminPage = () => {
                     <TableHead>Total Paid</TableHead>
                     <TableHead>Remaining</TableHead>
                     <TableHead>Phase Status</TableHead>
+                    <TableHead>E-Phone</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -402,6 +403,7 @@ const AdminPage = () => {
                           {getPhaseStatus(member)}
                         </Badge>
                       </TableCell>
+                      <TableCell>{member.e_contact_phone}</TableCell>
                       <TableCell>
                         <Dialog>
                           <DialogTrigger asChild>
